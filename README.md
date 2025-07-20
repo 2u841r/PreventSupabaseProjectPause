@@ -1,11 +1,16 @@
 # PreventSupabaseProjectPause
 
-1. Visit your supabase project and get SUPABASE_URL, SUPABASE_KEY (SUPABASE_ANON_KEY)
-(for this, you have to click on <kbd> Connect </kbd> and click on App Framework (and click astro for 100% match for code below), then copy env)
-3. Visit [Deno Deploy](https://dash.deno.com/account/overview) and click on New Playgroud.
-4. click on this icon  
-<img width="538" height="72" alt="image" src="https://github.com/user-attachments/assets/e543d0b2-cca5-48d3-bd0d-4d53393d3087" /> and add ENV values. 
-6. use this code - (but don't forget to adjust your env variable keys). these is 2 project alive with this code
+1. Visit your supabase project and get SUPABASE_URL, SUPABASE_KEY (SUPABASE_ANON_KEY)  
+(for this, you have to click on <kbd> Connect </kbd> and click on App Framework (and click astro for 100% match for code below), then copy env)  
+2. Visit [Deno Deploy](https://dash.deno.com/account/overview) and click on New Playgroud.  
+3. click on this icon
+
+<img width="538" height="72" alt="image" src="https://github.com/user-attachments/assets/e543d0b2-cca5-48d3-bd0d-4d53393d3087" />
+
+and add ENV values.   
+
+4. use this code - (but don't forget to adjust your env variable keys). these is 2 project alive with this code
+
 ```ts
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -88,4 +93,24 @@ Deno.cron("2MINCron", "*/2 * * * *", async () => {
 
 console.log("Service started - logging time every 2 minutes");
 ```
-5. Save & Deploy
+
+5. create table and function on supabase Dashboard
+```sql
+   -- Create the time_logs table
+CREATE TABLE IF NOT EXISTS time_logs (
+  id SERIAL PRIMARY KEY,
+  logged_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create a function to create the table (for the RPC call)
+CREATE OR REPLACE FUNCTION create_time_logs_table()
+RETURNS void
+LANGUAGE sql
+AS $$
+  CREATE TABLE IF NOT EXISTS time_logs (
+    id SERIAL PRIMARY KEY,
+    logged_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  );
+$$;
+```
+6. Save & Deploy
