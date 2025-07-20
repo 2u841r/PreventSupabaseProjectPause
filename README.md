@@ -1,15 +1,16 @@
 # PreventSupabaseProjectPause
 
 1. Visit your supabase project and get SUPABASE_URL, SUPABASE_KEY (SUPABASE_ANON_KEY)  
-(for this, you have to click on <kbd> Connect </kbd> and click on App Framework (and click astro for 100% match for code below), then copy env)  
+(for this, you have to click on <kbd> Connect </kbd> and click on App Framework then copy env.
 2. Visit [Deno Deploy](https://dash.deno.com/account/overview) and click on New Playgroud.  
 3. click on this icon
 
 <img width="538" height="72" alt="image" src="https://github.com/user-attachments/assets/e543d0b2-cca5-48d3-bd0d-4d53393d3087" />
 
-and add ENV values.   
+and add ENV values. 1. SUPABASE_URL1 2. SUPABASE_KEY1   
 
-4. use this code - (but don't forget to adjust your env variable keys). these is 2 project alive with this code
+4. use this code - (but don't forget to adjust your env variable keys). this is for 2 project alive with this code.
+if you have one project- then delete const supabase2 = createClient() and logTime(supabase2, "Database 2"),  
 
 ```ts
 import { createClient } from "jsr:@supabase/supabase-js@2";
@@ -94,7 +95,7 @@ Deno.cron("2MINCron", "*/2 * * * *", async () => {
 console.log("Service started - logging time every 2 minutes");
 ```
 
-5. create table and function on supabase Dashboard
+5. create table and function on supabase Dashboard (Table Editor)  
 ```sql
    -- Create the time_logs table
 CREATE TABLE IF NOT EXISTS time_logs (
